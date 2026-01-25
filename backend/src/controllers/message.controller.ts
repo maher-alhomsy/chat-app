@@ -1,3 +1,4 @@
+import { isValidObjectId } from 'mongoose';
 import type { NextFunction, Response } from 'express';
 
 import { Chat } from '../models/Chat';
@@ -12,6 +13,11 @@ async function getMessages(
   try {
     const userId = req.userId;
     const { chatId } = req.params;
+
+    if (!isValidObjectId(chatId)) {
+      res.status(400).json({ message: 'Invalid chatId' });
+      return;
+    }
 
     const chat = await Chat.findOne({ _id: chatId, participants: userId });
 
