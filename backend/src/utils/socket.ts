@@ -7,10 +7,6 @@ import { User } from '../models/User';
 import { Chat } from '../models/Chat';
 import { Message } from '../models/Message';
 
-interface AuthenticatedSocket extends Socket {
-  userId: string;
-}
-
 export const onlineUsers: Map<string, string> = new Map();
 
 export function initializeSocket(httpServer: HTTPServer) {
@@ -44,7 +40,7 @@ export function initializeSocket(httpServer: HTTPServer) {
         return next(new Error('Authentication error: User not found'));
       }
 
-      (socket as AuthenticatedSocket).userId = user._id.toString();
+      socket.data.userId = user._id.toString();
 
       next();
     } catch (error: any) {
@@ -53,7 +49,7 @@ export function initializeSocket(httpServer: HTTPServer) {
   });
 
   io.on('connection', (socket) => {
-    const userId = (socket as AuthenticatedSocket).userId;
+    const userId = socket.data.userId;
 
     // send list of currently online users to the newly connected client
     socket.emit('online-users', { userIds: Array.from(onlineUsers.keys()) });
@@ -101,7 +97,7 @@ export function initializeSocket(httpServer: HTTPServer) {
           chat.lastMessageAt = new Date();
           await chat.save();
 
-          await message.populate('sender', 'name email avatar');
+          await message.populate('sender', 'name avatar');
 
           // emit to chat room (for users inside that chat)
           io.to(`chat:${chatId}`).emit('new-message', message);
