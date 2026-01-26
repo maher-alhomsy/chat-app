@@ -1,7 +1,7 @@
 import { Stack } from 'expo-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import '../glogbal.css';
+import '../global.css';
 
 const queryClient = new QueryClient();
 
