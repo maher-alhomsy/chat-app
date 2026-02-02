@@ -1,5 +1,6 @@
-import { useAuth, useClerk } from '@clerk/clerk-expo';
 import { Pressable, Text } from 'react-native';
+
+import { useClerk } from '@clerk/clerk-expo';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Page = () => {
