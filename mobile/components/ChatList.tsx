@@ -42,7 +42,7 @@ const ChatList = ({ chats }: Props) => {
       ListEmptyComponent={
         <EmptyUI
           iconSize={64}
-          title="No chats yat"
+          title="No chats yet"
           iconColor="#6B6B70"
           buttonLabel="New Chat"
           iconName="chatbubbles-outline"
