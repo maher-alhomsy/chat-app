@@ -51,6 +51,7 @@ export default Sentry.wrap(function RootLayout() {
         >
           <Stack.Screen name="(auth)" options={{ animation: 'fade' }} />
           <Stack.Screen name="(tabs)" options={{ animation: 'fade' }} />
+          <Stack.Screen name="sso-callback" options={{ animation: 'fade' }} />
         </Stack>
       </ClerkProvider>
     </QueryClientProvider>

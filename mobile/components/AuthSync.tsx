@@ -19,13 +19,13 @@ const AuthSync = () => {
       console.log('Sync user');
 
       syncUser(undefined, {
-        onSuccess: (data) => {
-          console.log('User synced with backend: ', data.name);
+        onSuccess: ({ user }) => {
+          console.log('User synced with backend: ', user.name);
           Sentry.logger.info(
-            Sentry.logger.fmt`User synced with backend: ${data}`,
+            Sentry.logger.fmt`User synced with backend: ${user}`,
             {
-              userId: user.id,
-              userName: data?.user?.name,
+              userId: user._id,
+              userName: user?.name,
             },
           );
         },
