@@ -48,7 +48,7 @@ async function authCallback(req: Request, res: Response, next: NextFunction) {
 
       await user.save();
       res.status(201).json({ user });
-    }
+    } else res.status(200).json({ user });
   } catch (error) {
     next(error);
   }

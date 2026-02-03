@@ -8,7 +8,7 @@ export const useAuthCallback = () => {
 
   return useMutation({
     mutationFn: async () => {
-      const { data } = await apiWithAuth<User>({
+      const { data } = await apiWithAuth<{ user: User }>({
         method: 'POST',
         url: '/auth/callback',
       });
