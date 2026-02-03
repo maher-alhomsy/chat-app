@@ -1,22 +1,72 @@
 import {
   View,
   Text,
-  useWindowDimensions,
   Pressable,
   ActivityIndicator,
+  useWindowDimensions,
 } from 'react-native';
 import { Image } from 'expo-image';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { BlurView } from 'expo-blur';
 import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import useSocialAuth from '@/hooks/useSocialAuth';
+import { AnimatedOrb } from '@/components/AnimatedOrb';
 
 const Page = () => {
-  const { handleSocialAuth, loadingStrategy } = useSocialAuth();
   const { height, width } = useWindowDimensions();
+  const { handleSocialAuth, loadingStrategy } = useSocialAuth();
 
   return (
     <View className="flex-1 bg-surface-dark">
-      <View className="absolute inset-0 overflow-hidden"></View>
+      <View className="absolute inset-0 overflow-hidden">
+        <LinearGradient
+          colors={['#0D0D0F', '#1A1A2E', '#16213E', '#0D0D0F']}
+          style={{ position: 'absolute', width: '100%', height: '100%' }}
+          end={{ x: 1, y: 1 }}
+          start={{ x: 0, y: 0 }}
+        />
+
+        <AnimatedOrb
+          size={300}
+          initialX={-80}
+          duration={4000}
+          initialY={height * 0.1}
+          colors={['#F4A261', '#E76F51']}
+        />
+
+        <AnimatedOrb
+          size={250}
+          initialX={width - 100}
+          duration={5000}
+          initialY={height * 0.3}
+          colors={['#E76F51', '#F4A261']}
+        />
+
+        <AnimatedOrb
+          size={200}
+          initialX={width * 0.3}
+          duration={3500}
+          initialY={height * 0.6}
+          colors={['#FFD7BA', '#F4A261']}
+        />
+
+        <AnimatedOrb
+          size={180}
+          initialX={-50}
+          duration={4500}
+          initialY={height * 0.75}
+          colors={['#F4B183', '#E76F51']}
+        />
+
+        <BlurView
+          tint="dark"
+          intensity={70}
+          experimentalBlurMethod="dimezisBlurView"
+          style={{ position: 'absolute', height: '100%', width: '100%' }}
+        />
+      </View>
 
       <SafeAreaView className="flex-1">
         <View className="items-center pt-10">
