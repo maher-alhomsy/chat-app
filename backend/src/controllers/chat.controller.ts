@@ -16,14 +16,14 @@ async function getChats(req: AuthRequest, res: Response, next: NextFunction) {
     const formatedChats = chats.map((chat) => {
       const otherParticipants = chat.participants.filter(
         ({ _id }) => _id.toString() !== userId,
-      );
+      )[0];
 
       return {
         _id: chat._id,
         createdAt: chat.createdAt,
         lastMessage: chat.lastMessage,
         lastMessageAt: chat.lastMessageAt,
-        participants: otherParticipants ?? null,
+        participant: otherParticipants ?? null,
       };
     });
 
@@ -73,7 +73,7 @@ async function getOrCreateChat(
 
     const otherParticipants = chat.participants.filter(
       ({ _id }) => _id.toString() !== userId,
-    );
+    )[0];
 
     res.json({
       _id: chat.id,
