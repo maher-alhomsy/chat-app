@@ -51,6 +51,14 @@ export default Sentry.wrap(function RootLayout() {
         >
           <Stack.Screen name="(auth)" options={{ animation: 'fade' }} />
           <Stack.Screen name="(tabs)" options={{ animation: 'fade' }} />
+          <Stack.Screen
+            name="new-chat"
+            options={{
+              presentation: 'formSheet',
+              sheetCornerRadius: 40,
+              sheetAllowedDetents: [0.5, 90],
+            }}
+          />
           <Stack.Screen name="sso-callback" options={{ animation: 'fade' }} />
         </Stack>
       </ClerkProvider>

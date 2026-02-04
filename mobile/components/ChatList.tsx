@@ -48,7 +48,7 @@ const ChatList = ({ chats }: Props) => {
           iconName="chatbubbles-outline"
           subtitle="Start a conversation!"
           onPressButton={() => {
-            console.log('Pressed');
+            router.push('/new-chat');
           }}
         />
       }
